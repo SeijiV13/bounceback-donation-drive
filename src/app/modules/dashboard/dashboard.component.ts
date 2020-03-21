@@ -2,14 +2,16 @@ import { PageTitleComponent } from './../../shared/components/page-title/page-ti
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 import { Router, NavigationEnd } from '@angular/router';
-
+import { faList } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+  faList = faList;
   @ViewChild('pageTitle') pageTitle: PageTitleComponent;
+  
   constructor(private sidebarService: NbSidebarService,
               private router: Router) {
   }

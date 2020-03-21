@@ -1,3 +1,4 @@
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-title.component.scss']
 })
 export class PageTitleComponent implements OnInit {
+  faFolder = faFolder;
   titleMaps = [
     {
       title: 'Dashboard',

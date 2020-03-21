@@ -9,7 +9,7 @@ import { DashboardComponent } from './dashboard.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductDonationModule } from '../product-donation/product-donation.module';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 const routes: Routes = [
   {
     path: '', component: DashboardComponent, children: [
@@ -48,7 +48,8 @@ export class DashboardRoutingModule { }
     DashboardRoutingModule,
     NebularModule,
     ProductDonationModule,
-    ProductRequestsModule
+    ProductRequestsModule,
+    FontAwesomeModule,
   ]
 })
 export class DashboardModule { }

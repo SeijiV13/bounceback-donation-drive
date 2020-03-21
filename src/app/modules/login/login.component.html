@@ -1,6 +1,6 @@
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form (ngSubmit)="signUp()">
+		<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
 			<h1>Create new account</h1>
 			<!-- <div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -8,14 +8,14 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div> -->
 			<!-- <span>or use your email for registration</span> -->
-			<input type="text" placeholder="Name" />
-			<input type="text" placeholder="Username" />
-			<input type="password" placeholder="Password" />
+			<input formControlName="name" type="text" placeholder="Name" />
+			<input formControlName="username" type="text" placeholder="Username" />
+			<input formControlName="password" type="password" placeholder="Password" />
 			<button (click)="signUp()">Sign Up</button>
 		</form>
 	</div>
-	<div class="form-container sign-in-container">
-		<form (ngSubmit)="signIn()">
+	<div  class="form-container sign-in-container">
+		<form [formGroup]="signInForm" (ngSubmit)="signIn()">
 			<h1>Sign in</h1>
 			<!-- <div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -23,8 +23,8 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div> -->
 			<!-- <span>or use your account</span> -->
-			<input type="text" placeholder="Username" />
-			<input type="password" placeholder="Password" />
+			<input formControlName="username" type="text" placeholder="Username" />
+			<input formControlName="password" type="password" placeholder="Password" />
 			<!-- <a href="#">Forgot your password?</a> -->
 			<button (click)="signIn()">Sign In</button>
 		</form>
@@ -47,11 +47,11 @@
 
 
 <div *ngIf="formStatus" class="mobile-container mobile-sign-in-container">
-		<form (ngSubmit)="signIn()">
+		<form [formGroup]="signInForm" (ngSubmit)="signIn()">
 			<h1>Sign in</h1>
 	
-			<input type="text" placeholder="Username" />
-			<input type="password" placeholder="Password" />
+			<input formControlName="username" type="text" placeholder="Username" />
+			<input formControlName="password" type="password" placeholder="Password" />
 
 			<button (click)="signIn()" >Sign In</button>
 			<a style="cursor: pointer;" (click)="toggleForm()" id="signUp2">Sign Up</a>
@@ -59,11 +59,11 @@
 </div>
 
 <div *ngIf="!formStatus" class="mobile-container mobile-sign-up-container">
-		<form (ngSubmit)="signUp()">
+		<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
 			<h1>Create new account</h1>
-			<input type="text" placeholder="Name" />
-			<input type="text" placeholder="Username" />
-			<input type="password" placeholder="Password" />
+			<input formControlName="name" type="text" placeholder="Name" />
+			<input formControlName="username" type="text" placeholder="Username" />
+			<input formControlName="password" type="password" placeholder="Password" />
 			<button (click)="signUp()">Sign Up</button>
 			<a style="cursor: pointer;" (click)="toggleForm()" id="signIn2">Sign In</a>
 		</form>

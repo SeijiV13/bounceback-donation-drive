@@ -34,13 +34,37 @@
 			<div class="overlay-panel overlay-left">
 				<h1>Have Account?</h1>
 				<p>Click the Sign in button below if you have an acoount</p>
-				<button class="ghost" id="signIn">Sign In</button>
+				<button (click)="toggleForm()" class="ghost" id="signIn">Sign In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Bounceback Donation Drive</h1>
 				<p>Click the sign up button below if you dont have an account</p>
-				<button class="ghost" id="signUp">Sign Up</button>
+				<button (click)="toggleForm()"  class="ghost" id="signUp">Sign Up</button>
 			</div>
 		</div>
 	</div>
+</div>
+
+
+<div *ngIf="formStatus" class="mobile-container mobile-sign-in-container">
+		<form (ngSubmit)="signIn()">
+			<h1>Sign in</h1>
+	
+			<input type="text" placeholder="Username" />
+			<input type="password" placeholder="Password" />
+
+			<button (click)="signIn()" >Sign In</button>
+			<a style="cursor: pointer;" (click)="toggleForm()" id="signUp2">Sign Up</a>
+		</form>
+</div>
+
+<div *ngIf="!formStatus" class="mobile-container mobile-sign-up-container">
+		<form (ngSubmit)="signUp()">
+			<h1>Create new account</h1>
+			<input type="text" placeholder="Name" />
+			<input type="text" placeholder="Username" />
+			<input type="password" placeholder="Password" />
+			<button (click)="signUp()">Sign Up</button>
+			<a style="cursor: pointer;" (click)="toggleForm()" id="signIn2">Sign In</a>
+		</form>
 </div>

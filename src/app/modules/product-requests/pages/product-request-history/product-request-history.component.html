@@ -2,6 +2,7 @@
 <div *ngFor="let ticket of requestorTickets">
     
         <app-flip-card 
+        [accent]="'warning'"
         [frontHeaderTemplate]="frontHeaderTemplate" 
         [frontTemplate]="frontTemplate"
         [backHeaderTemplate]="backHeaderTemplate" 

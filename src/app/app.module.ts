@@ -7,14 +7,10 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { WidgetsComponent } from './modules/widgets/widgets.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PageTitleComponent } from './shared/components/page-title/page-title.component';
 @NgModule({
   declarations: [
     AppComponent,
-    WidgetsComponent,
-    PageTitleComponent,
   ],
   imports: [
     BrowserModule,

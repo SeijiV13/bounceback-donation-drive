@@ -33,6 +33,7 @@ export class ProductRequestsRoutingModule { }
     NebularModule,
     ProductRequestsRoutingModule
 
-  ]
+  ],
+  exports: [ProductRequestHistoryComponent]
 })
 export class ProductRequestsModule { }

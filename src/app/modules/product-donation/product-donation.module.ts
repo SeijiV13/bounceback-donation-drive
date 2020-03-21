@@ -32,6 +32,6 @@ export class ProductDonationRoutingModule { }
     FormsModule,
     ReactiveFormsModule,
     ProductDonationRoutingModule
-  ]
+  ], exports: [ProductDonationHistoryComponent]
 })
 export class ProductDonationModule { }

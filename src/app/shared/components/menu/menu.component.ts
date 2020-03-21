@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -9,6 +10,11 @@ import { NbMenuItem, NbMenuService } from '@nebular/theme';
 })
 export class MenuComponent implements OnInit {
     items: NbMenuItem[] = [
+        {
+            title: 'Dashboard',
+            expanded: false,
+            link: '/dashboard'
+        },
         {
           title: 'Products',
           expanded: false,
@@ -49,7 +55,7 @@ export class MenuComponent implements OnInit {
           },
     ];
 
-  constructor(private menuService: NbMenuService) {
+  constructor(private menuService: NbMenuService, private router: Router) {
   }
 
   ngOnInit(): void {}

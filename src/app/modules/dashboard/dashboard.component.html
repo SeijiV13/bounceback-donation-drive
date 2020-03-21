@@ -1,7 +1,7 @@
  <nb-layout>
     <nb-layout-header fixed>
         <span>BounceBack Donation Drive </span>   
-        <nb-user size="medium"name="John Doe"title="Admin" color="#cccccc"></nb-user>
+        <nb-user style="cursor:pointer" [nbPopover]="templateRef" nbPopoverPlacement="bottom" size="medium"name="John Doe"title="Admin" color="#cccccc"></nb-user>
    </nb-layout-header>
 
     <nb-sidebar>
@@ -12,3 +12,9 @@
         <router-outlet></router-outlet>
     </nb-layout-column>
   </nb-layout>
+  <ng-template #templateRef>
+      <div style="padding:5px">
+
+          <button  nbButton outline status="info" (click)="logout()">Logout</button>
+      </div>
+   </ng-template>

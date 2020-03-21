@@ -1,4 +1,3 @@
-import { NebularModule } from './shared/modules/nebular/nebular.module';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,17 +9,18 @@ import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WidgetsComponent } from './modules/widgets/widgets.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PageTitleComponent } from './shared/components/page-title/page-title.component';
 @NgModule({
   declarations: [
     AppComponent,
     WidgetsComponent,
+    PageTitleComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NebularModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

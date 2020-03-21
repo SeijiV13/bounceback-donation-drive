@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbIconModule,
    NbActionsModule, NbMenuModule, NbCardModule, NbButtonModule,
-   NbTabsetModule, NbInputModule, NbBadgeModule, NbUserModule, NbToastrModule, NbSelectModule  } from '@nebular/theme';
+   NbTabsetModule, NbInputModule, NbBadgeModule, NbUserModule, NbToastrModule, NbSelectModule, NbPopoverModule  } from '@nebular/theme';
 import { FlipCardComponent } from './flip-card/flip-card.component';
 import { CardComponent } from './card/card.component';
 @NgModule({
@@ -24,6 +24,7 @@ import { CardComponent } from './card/card.component';
     NbInputModule,
     NbBadgeModule,
     NbUserModule,
+    NbPopoverModule,
   ],
   exports: [
     NbThemeModule,
@@ -41,7 +42,8 @@ import { CardComponent } from './card/card.component';
     NbBadgeModule,
     NbUserModule,
     NbToastrModule,
-    NbSelectModule
+    NbSelectModule,
+    NbPopoverModule,
   ]
 })
 export class NebularModule { }

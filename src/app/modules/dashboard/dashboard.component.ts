@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,8 @@ import { NbSidebarService } from '@nebular/theme';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private sidebarService: NbSidebarService) {
+  constructor(private sidebarService: NbSidebarService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -16,6 +18,12 @@ export class DashboardComponent implements OnInit {
 
   toggle() {
     this.sidebarService.toggle();
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/']);
+
   }
 
 }

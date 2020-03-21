@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme';
+import { NbMenuItem, NbMenuService } from '@nebular/theme';
 
 
 @Component({
@@ -49,10 +49,9 @@ export class MenuComponent implements OnInit {
           },
     ];
 
-  constructor() {
+  constructor(private menuService: NbMenuService) {
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

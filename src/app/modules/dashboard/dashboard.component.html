@@ -2,8 +2,13 @@
     <nb-layout-header fixed>
   
         <span>
-            <fa-icon [icon]="faList" (click)="toggle()"></fa-icon>
-            BounceBack Donation Drive 
+            <fa-icon [icon]="faList" [size]="'1x'" (click)="toggle()"></fa-icon>
+            &nbsp;&nbsp;
+            <span>
+
+                <fa-icon [icon]="faDonate" [size]="'2x'" (click)="toggle()"></fa-icon>
+                BounceBack Donation Drive 
+            </span>
         </span>   
         <nb-user style="cursor:pointer" [nbPopover]="templateRef" nbPopoverPlacement="bottom" size="medium"name="John Doe"title="Admin" color="#cccccc"></nb-user>
    </nb-layout-header>

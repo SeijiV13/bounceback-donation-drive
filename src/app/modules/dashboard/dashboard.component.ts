@@ -2,7 +2,7 @@ import { PageTitleComponent } from './../../shared/components/page-title/page-ti
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 import { Router, NavigationEnd } from '@angular/router';
-import { faList } from '@fortawesome/free-solid-svg-icons';
+import { faList, faDonate } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,6 +10,7 @@ import { faList } from '@fortawesome/free-solid-svg-icons';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   faList = faList;
+  faDonate = faDonate;
   @ViewChild('pageTitle') pageTitle: PageTitleComponent;
   
   constructor(private sidebarService: NbSidebarService,

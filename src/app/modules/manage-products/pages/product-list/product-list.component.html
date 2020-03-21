@@ -1,0 +1,34 @@
+
+<div *ngFor="let product of products">
+    
+    <app-flip-card 
+    [frontHeaderTemplate]="frontHeaderTemplate" 
+    [frontTemplate]="frontTemplate"
+    [backHeaderTemplate]="backHeaderTemplate" 
+    [backTemplate]="backTemplate"
+    > 
+   </app-flip-card>
+    <ng-template #frontHeaderTemplate>  
+        {{product?.name}}
+        <hr>
+     </ng-template>
+     <ng-template #frontTemplate>  
+       <div style="position: relative;">
+            <b>Quantity: 
+                <nb-badge text="{{product?.quantity}}" *ngIf="product.quantity === 0" class="quantity" status="danger" position="top-left" ></nb-badge>
+                <nb-badge text="{{product?.quantity}}" *ngIf="product.quantity > 0" class="quantity" status="primary" position="top-left" ></nb-badge>
+            </b>
+       </div> 
+       <br>
+       <div>
+           <b>Description:</b> {{product?.description}};
+       </div> 
+     </ng-template>
+     <ng-template #backHeaderTemplate>  
+            Comments
+            <hr>
+    </ng-template>
+    <ng-template #backTemplate>  
+            {{product?.comments}}
+    </ng-template>
+</div>

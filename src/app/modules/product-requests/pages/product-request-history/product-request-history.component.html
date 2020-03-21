@@ -1,0 +1,46 @@
+
+<div *ngFor="let ticket of requestorTickets">
+    
+        <app-flip-card 
+        [frontHeaderTemplate]="frontHeaderTemplate" 
+        [frontTemplate]="frontTemplate"
+        [backHeaderTemplate]="backHeaderTemplate" 
+        [backTemplate]="backTemplate"
+        > 
+       </app-flip-card>
+        <ng-template #frontHeaderTemplate>
+            Ticket Number#: {{ticket.id}}  
+            <hr>
+         </ng-template>
+         <ng-template #frontTemplate>  
+           <div>
+              <h4>Requestor Details</h4>
+              <b>Name:</b>  {{ticket?.name}}
+              <br>
+              <b>Address:</b> {{ticket.address}}
+              <br>
+              <b>Contact Person:</b> {{ticket.contactPerson}}
+              <br>
+              <b>Contact Details:</b> {{ticket.contactNumber}}
+            
+           </div>  
+         </ng-template>
+         <ng-template #backHeaderTemplate>  
+                Products Requested
+                <hr>
+        </ng-template>
+        <ng-template #backTemplate>  
+            <br>
+            <ng-container *ngFor="let product of ticket.products">
+                <b>Product: </b> {{product?.name}}
+                <br>
+                <div style="position: relative;">
+                        <b>Quantity: 
+                            <nb-badge text="{{product?.quantity}}" *ngIf="product.quantity > 0" class="quantity" status="primary" position="top-left" ></nb-badge>
+                        </b>
+                   </div> 
+                   <br>
+            </ng-container>
+        </ng-template>
+    </div>
+    

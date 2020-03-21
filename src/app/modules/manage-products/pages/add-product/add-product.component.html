@@ -1,0 +1,37 @@
+<app-card class="card-container"
+[headerTemplate]="headerTemplate"
+[bodyTemplate]="bodyTemplate"         
+></app-card>
+
+<ng-template #headerTemplate>
+    Add New Product
+</ng-template>
+
+<ng-template #bodyTemplate>
+    <form [formGroup]="form" (ngSubmit)="createProduct()">
+        <div>
+          <label for="name">Name</label>
+          <input formControlName="name" type="text" fullWidth nbInput status="primary" placeholder="Alcohol etc.">
+        </div>
+        <br>
+        <div>
+          <label for="description">Description</label>
+          <textarea formControlName="description" fullWidth nbInput status="primary" placeholder="1 liter..."></textarea>
+        </div>
+        <br>
+        <div>
+            <label for="quantity">Quantity</label>
+            <input formControlName="quantity" type="number" fullWidth nbInput status="primary" placeholder="1...">
+        </div>
+        <br>
+        <div>
+          <label for="comments">Comments</label>
+          <textarea formControlName="comments" fullWidth nbInput status="primary" placeholder="this will be restocked soon..."></textarea>
+        </div>         
+                
+       <div class="button-container">
+            <button nbButton outline status="primary" (click)="clear()">Clear</button>
+            <button nbButton outline status="info" (click)="createProduct()">Submit</button>
+       </div>
+    </form>
+</ng-template>

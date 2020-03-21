@@ -1,0 +1,26 @@
+<nb-flip-card>
+    <nb-card-front>
+      <nb-card [accent]="accent">
+        <nb-card-header>
+              <div *ngTemplateOutlet="frontHeaderTemplate">
+              </div> 
+        </nb-card-header>
+        <nb-card-body>
+            <div *ngTemplateOutlet="frontTemplate">
+              </div> 
+        </nb-card-body>
+      </nb-card>
+    </nb-card-front>
+    <nb-card-back>
+      <nb-card [accent]="accent">
+        <nb-card-header>
+              <div *ngTemplateOutlet="backHeaderTemplate">
+              </div> 
+        </nb-card-header>
+        <nb-card-body>
+            <div *ngTemplateOutlet="backTemplate">
+            </div> 
+        </nb-card-body>
+      </nb-card>
+    </nb-card-back>
+  </nb-flip-card>

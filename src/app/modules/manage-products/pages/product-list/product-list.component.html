@@ -9,7 +9,10 @@
     > 
    </app-flip-card>
     <ng-template #frontHeaderTemplate>  
-        {{product?.name}}
+       <span>
+           {{product?.name}}
+       </span>
+       <button style="float:right" nbButton status="danger">Delete</button> 
         <hr>
      </ng-template>
      <ng-template #frontTemplate>  

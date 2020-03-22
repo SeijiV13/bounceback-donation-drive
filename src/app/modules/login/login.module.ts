@@ -1,5 +1,4 @@
 import { AuthService } from './../../core/services/authentication.service';
-import { NebularModule } from './../../shared/modules/nebular/nebular.module';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { NgModule } from '@angular/core';
@@ -32,7 +31,6 @@ export class LoginRoutingModule { }
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NebularModule,
   ], providers: [AuthService]
 })
 export class LoginModule { }

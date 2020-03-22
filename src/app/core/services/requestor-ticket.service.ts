@@ -21,14 +21,14 @@ export class RequestorTicketService {
   }
 
   createRequestorTicket(donorTicket: RequestorTicket): Observable<{message: string, data: RequestorTicket}> {
-    return this.http.post(`${this.url}/requesto`, donorTicket).pipe(
+    return this.http.post(`${this.url}/requestor`, donorTicket).pipe(
       tap((data: {message: string, data: RequestorTicket}) => data),
       catchError(error => throwError(error))
     );
   }
 
   approveDonorTicker(id): Observable<{message: string}> {
-    return this.http.put(`${this.url}/requesto/${id}`, {}).pipe(
+    return this.http.put(`${this.url}/requestor/${id}`, {}).pipe(
       tap((data: {message: string}) => data),
       catchError(error => throwError(error))
     );

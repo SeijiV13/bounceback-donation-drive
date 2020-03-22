@@ -33,7 +33,7 @@
         <ng-template #backTemplate>  
             <br>
             <ng-container *ngFor="let product of ticket.products">
-                <b>Product: </b> {{product?.name}}
+                <b>Product: </b> {{getProductName(product?.id)}}
                 <br>
                 <div style="position: relative;">
                         <b>Quantity: 

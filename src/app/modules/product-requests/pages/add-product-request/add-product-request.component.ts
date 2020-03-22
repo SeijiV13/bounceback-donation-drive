@@ -1,6 +1,10 @@
+import { ProductService } from './../../../../core/services/product.service';
 import { Product } from './../../../../shared/models/Product';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
+import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product-request',
@@ -10,11 +14,22 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AddProductRequestComponent implements OnInit {
   @Input() products: Product[] = [];
   form: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private productService: ProductService,
+              private toastr: ToastrService,
+              private requestorService: RequestorTicketService,
+              private router: Router) {
     this.initializeForm();
    }
 
   ngOnInit(): void {
+   this.getAllProducts();
+  }
+
+  getAllProducts() {
+    this.productService.getProducts().subscribe((data) => {
+      this.products = data;
+    });
   }
 
   initializeForm() {
@@ -32,7 +47,16 @@ getProducts() {
 }
 
   createTicket() {
-    console.log(this.form.getRawValue());
+    const ticket = this.form.getRawValue();
+    this.requestorService.createRequestorTicket(ticket).subscribe((data) => {
+      this.toastr.success(data.message, 'Success!');
+      this.router.navigate(['/dashboard/product-requests/history']);
+      this.form.reset();
+    }, error => {
+      if (error) {
+        this.toastr.error(error.error.message, 'Error!');
+      }
+    });
   }
 
   clear() {
@@ -49,7 +73,7 @@ getProducts() {
 
   createProduct() {
     return this.fb.group({
-      name: [''],
+      id: [''],
       quantity: [1],
     });
   }

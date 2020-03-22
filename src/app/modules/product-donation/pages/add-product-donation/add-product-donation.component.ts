@@ -1,6 +1,10 @@
+import { ProductService } from './../../../../core/services/product.service';
+import { DonorTicketService } from './../../../../core/services/donor-ticket.service';
 import { Product } from './../../../../shared/models/Product';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-product-donation',
@@ -10,12 +14,23 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AddProductDonationComponent implements OnInit {
   @Input() products: Product[] = [];
   form: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private donorService: DonorTicketService,
+              private router: Router,
+              private toastr: ToastrService,
+              private productService: ProductService) {
     this.initializeForm();
    }
 
-  ngOnInit(): void {
-  }
+   ngOnInit(): void {
+    this.getAllProducts();
+   }
+ 
+   getAllProducts() {
+     this.productService.getProducts().subscribe((data) => {
+       this.products = data;
+     });
+   }
+ 
 
   initializeForm() {
     this.form = this.fb.group({
@@ -26,13 +41,24 @@ export class AddProductDonationComponent implements OnInit {
   });
 }
 
+
+
+createTicket() {
+  const ticket = this.form.getRawValue();
+  this.donorService.createDonorTicket(ticket).subscribe((data) => {
+    this.toastr.success(data.message, 'Success!');
+    this.router.navigate(['/dashboard/product-donation/history']);
+    this.form.reset();
+  }, error => {
+    if (error) {
+      this.toastr.error(error.error.message, 'Error!');
+    }
+  });
+}
+
 getProducts() {
   return ( this.form.controls.products as FormArray).controls;
 }
-
-  createTicket() {
-    console.log(this.form.getRawValue());
-  }
 
   clear() {
     this.form.reset();
@@ -48,7 +74,7 @@ getProducts() {
 
   createProduct() {
     return this.fb.group({
-      name: [''],
+      id: [''],
       quantity: [1],
     });
   }

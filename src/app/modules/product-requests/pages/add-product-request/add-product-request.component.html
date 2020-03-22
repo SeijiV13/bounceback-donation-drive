@@ -50,9 +50,9 @@
                 <div class="col ">
                     
                     <label for="name">Product Name</label>
-                    <nb-select formControlName="name" fullWidth status="primary">
-                            <nb-option *ngFor="let data of products" [value]="data.id">{{data.name}}</nb-option>
-                    </nb-select>
+                    <select formControlName="id">
+                            <option *ngFor="let data of products" [value]="data.id">{{data.name}}</option>
+                    </select>
                 </div>
                 <div class="col">
                     <label for="quantity">Quantity</label>
@@ -69,6 +69,6 @@
 </ng-template>
 <div class="button-container">
         <button type="button" nbButton outline status="primary" (click)="clear()">Clear</button>
-        <button nbButton outline status="info" (click)="createTicket()">Submit</button>
+        <button type="submit" nbButton outline status="info" (submit)="createTicket()">Submit</button>
 </div>
 </form>

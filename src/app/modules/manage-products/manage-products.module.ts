@@ -35,7 +35,6 @@ export class ManageProductsRoutingModule { }
     FormsModule,
     ReactiveFormsModule,
     NebularModule,
-    NbDialogModule.forChild(),
     HttpClientModule,
     ManageProductsRoutingModule
   ], providers: [AuthService, ProductService,

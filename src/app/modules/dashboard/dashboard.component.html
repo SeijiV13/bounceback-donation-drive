@@ -20,11 +20,11 @@
     <nb-layout-column>
         <app-page-title #pageTitle></app-page-title>
         <router-outlet></router-outlet>
+        <ng-template #templateRef>
+            <div style="padding:5px">
+      
+                <button  nbButton outline status="info" (click)="logout()">Logout</button>
+            </div>
+         </ng-template>
     </nb-layout-column>
   </nb-layout>
-  <ng-template #templateRef>
-      <div style="padding:5px">
-
-          <button  nbButton outline status="info" (click)="logout()">Logout</button>
-      </div>
-   </ng-template>

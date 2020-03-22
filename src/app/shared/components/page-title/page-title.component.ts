@@ -1,5 +1,5 @@
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-page-title',
@@ -35,9 +35,10 @@ export class PageTitleComponent implements OnInit {
     },
   ];
   title: string;
-  constructor() { }
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.cd.detectChanges();
   }
 
 }

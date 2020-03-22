@@ -1,5 +1,5 @@
 import { PageTitleComponent } from './../../shared/components/page-title/page-title.component';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 import { Router, NavigationEnd } from '@angular/router';
 import { faList, faDonate } from '@fortawesome/free-solid-svg-icons';
@@ -12,9 +12,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   faList = faList;
   faDonate = faDonate;
   @ViewChild('pageTitle') pageTitle: PageTitleComponent;
-  
   constructor(private sidebarService: NbSidebarService,
-              private router: Router) {
+              private router: Router,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (event instanceof NavigationEnd) {
        const titleObject =   this.pageTitle.titleMaps.find((data) => data.link === event.url); 
        this.pageTitle.title = titleObject.title;
+       this.cd.detectChanges();
       }
     });
   }

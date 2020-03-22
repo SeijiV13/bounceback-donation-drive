@@ -1,3 +1,4 @@
+import { ProductService } from './../../core/services/product.service';
 import { AuthInterceptor } from './../../core/interceptors/http-interceptor.service';
 import { AuthService } from './../../core/services/authentication.service';
 import { NebularModule } from './../../shared/modules/nebular/nebular.module';
@@ -43,6 +44,8 @@ export class ProductRequestsRoutingModule { }
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }]
+  },
+  ProductService
+]
 })
 export class ProductRequestsModule { }

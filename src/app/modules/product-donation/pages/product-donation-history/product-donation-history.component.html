@@ -17,7 +17,7 @@
               <h4>Donor Details</h4>
               <b>Name:</b>  {{ticket?.name}}
               <br>
-              <b>Contact Person:</b> {{ticket.contacterson}}
+              <b>Contact Person:</b> {{ticket.contactPerson}}
               <br>
               <b>Contact Details:</b> {{ticket.contactNumber}}
             
@@ -30,7 +30,7 @@
         <ng-template #backTemplate>  
             <br>
             <ng-container *ngFor="let product of ticket.products">
-                <b>Product: </b> {{product?.name}}
+                <b>Product: </b> {{getProductName(product?.id)}}
                 <br>
                 <div style="position: relative;">
                         <b>Quantity: 

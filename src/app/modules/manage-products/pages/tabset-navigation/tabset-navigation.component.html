@@ -1,8 +1,8 @@
 <nb-tabset fullWidth>
     <nb-tab tabTitle="Product List">
-         <app-product-list></app-product-list>
+         <app-product-list #productList></app-product-list>
     </nb-tab>
     <nb-tab tabTitle="Add Product">
-        <app-add-product></app-add-product>
+        <app-add-product (createProductEmitter)="getProducts()"></app-add-product>
     </nb-tab>
  </nb-tabset>

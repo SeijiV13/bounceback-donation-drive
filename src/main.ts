@@ -5,7 +5,10 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
+  environment.url = 'https://bounceback-api.herokuapp.com';
   enableProdMode();
+} else {
+
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

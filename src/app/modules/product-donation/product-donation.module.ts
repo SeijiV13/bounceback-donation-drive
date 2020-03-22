@@ -1,3 +1,5 @@
+import { AuthInterceptor } from './../../core/interceptors/http-interceptor.service';
+import { AuthService } from './../../core/services/authentication.service';
 import { NebularModule } from './../../shared/modules/nebular/nebular.module';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -5,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { AddProductDonationComponent } from './pages/add-product-donation/add-product-donation.component';
 import { ProductDonationHistoryComponent } from './pages/product-donation-history/product-donation-history.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { DonorTicketService } from 'src/app/core/services/donor-ticket.service';
 
 const routes: Routes = [
   {
@@ -31,7 +35,13 @@ export class ProductDonationRoutingModule { }
     NebularModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     ProductDonationRoutingModule
-  ], exports: [ProductDonationHistoryComponent]
+  ], exports: [ProductDonationHistoryComponent],
+  providers: [AuthService, DonorTicketService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }]
 })
 export class ProductDonationModule { }

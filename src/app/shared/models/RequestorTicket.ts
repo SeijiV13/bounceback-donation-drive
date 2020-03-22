@@ -1,9 +1,10 @@
-import { Product } from './Product';
+
 export interface RequestorTicket {
     id: string;
     name: string;
     address: string;
     contactPerson: string;
     contactNumber: string;
-    products: Product[];
+    products: {id: string, quantity: number}[];
+    status: string;
 }

@@ -1,3 +1,5 @@
+import { AuthInterceptor } from './../../core/interceptors/http-interceptor.service';
+import { AuthService } from './../../core/services/authentication.service';
 import { NebularModule } from './../../shared/modules/nebular/nebular.module';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -5,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { AddProductRequestComponent } from './pages/add-product-request/add-product-request.component';
 import { ProductRequestHistoryComponent } from './pages/product-request-history/product-request-history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 const routes: Routes = [
@@ -34,6 +38,11 @@ export class ProductRequestsRoutingModule { }
     ProductRequestsRoutingModule
 
   ],
-  exports: [ProductRequestHistoryComponent]
+  exports: [ProductRequestHistoryComponent],
+  providers: [AuthService, RequestorTicketService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }]
 })
 export class ProductRequestsModule { }

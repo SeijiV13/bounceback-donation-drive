@@ -1,10 +1,9 @@
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
 		<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-			<div *ngIf="httpErrorMessage" class="alert-danger">
-				{{httpErrorMessage}}
+			<div *ngIf="httpErrorSignUpMessage" class="alert-danger">
+				{{httpErrorSignUpMessage}}
 			</div>
-	
 			<h1>Create new account</h1>
 
 			<input formControlName="name" type="text" placeholder="Name" />
@@ -13,15 +12,18 @@
 			<span *ngIf="signUpForm.controls.username.hasError && signUpForm.controls.username.touched" class="error-message">{{getSignUpFormError('username')}}</span>
 			<input formControlName="password" type="password" placeholder="Password" />
 			<span *ngIf="signUpForm.controls.password.hasError && signUpForm.controls.password.touched" class="error-message">{{getSignUpFormError('password')}}</span>
-			<button (click)="signUp()">Sign Up</button>
+			<button type="submit" (submit)="signUp()">Sign Up</button>
 		</form>
 	</div>
 	<div  class="form-container sign-in-container">
 
 		<form [formGroup]="signInForm" (ngSubmit)="signIn()">
 					
-			<div *ngIf="httpErrorMessage" class="alert-danger">
-				{{httpErrorMessage}}
+			<div *ngIf="httpErrorSignInMessage" class="alert-danger">
+				{{httpErrorSignInMessage}}
+			</div>
+			<div *ngIf="successRegisterMessage" class="alert-success">
+				{{successRegisterMessage}}
 			</div>
 			<h1>Sign in</h1>
 
@@ -31,7 +33,7 @@
 			<input formControlName="password" type="password" placeholder="Password" />
 			<span *ngIf="signInForm.controls.password.hasError && signInForm.controls.password.touched" class="error-message">{{getSigninFormError('password')}}</span>
 
-			<button (click)="signIn()">Sign In</button>
+			<button type="submit" (submit)="signIn()">Sign In</button>
 		</form>
 	</div>
 	<div class="overlay-container">
@@ -39,12 +41,12 @@
 			<div class="overlay-panel overlay-left">
 				<h1>Have Account?</h1>
 				<p>Click the Sign in button below if you have an acoount</p>
-				<button (click)="toggleForm()" class="ghost" id="signIn">Sign In</button>
+				<button type="button" (click)="toggleForm()" class="ghost" id="signIn">Sign In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Bounceback Donation Drive</h1>
 				<p>Click the sign up button below if you dont have an account</p>
-				<button (click)="toggleForm()"  class="ghost" id="signUp">Sign Up</button>
+				<button type="button" (click)="toggleForm()"  class="ghost" id="signUp">Sign Up</button>
 			</div>
 		</div>
 	</div>
@@ -53,8 +55,8 @@
 
 <div *ngIf="formStatus" class="mobile-container mobile-sign-in-container">
 		<form [formGroup]="signInForm" (ngSubmit)="signIn()">
-			<div *ngIf="httpErrorMessage" class="alert-danger">
-				{{httpErrorMessage}}
+			<div *ngIf="httpErrorSignInMessage" class="alert-danger">
+				{{httpErrorSignInMessage}}
 			</div>
 			<h1>Sign in</h1>
 	
@@ -63,15 +65,15 @@
 			<input formControlName="password" type="password" placeholder="Password" />
 			<span *ngIf="signInForm.controls.password.hasError && signInForm.controls.password.touched" class="error-message">{{getSigninFormError('password')}}</span>
 
-			<button (click)="signIn()" >Sign In</button>
+			<button  type="submit" (submit)="signIn()" >Sign In</button>
 			<a style="cursor: pointer;" (click)="toggleForm()" id="signUp2">Sign Up</a>
 		</form>
 </div>
 
 <div *ngIf="!formStatus" class="mobile-container mobile-sign-up-container">
 		<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-			<div *ngIf="httpErrorMessage" class="alert-danger">
-				{{httpErrorMessage}}
+			<div *ngIf="httpErrorSignUpMessage" class="alert-danger">
+				{{httpErrorSignUpMessage}}
 			</div>
 			<h1>Create new account</h1>
 			<input formControlName="name" type="text" placeholder="Name" />
@@ -80,7 +82,7 @@
 			<span *ngIf="signUpForm.controls.username.hasError && signUpForm.controls.username.touched" class="error-message">{{getSignUpFormError('username')}}</span>
 			<input formControlName="password" type="password" placeholder="Password" />
 			<span *ngIf="signUpForm.controls.password.hasError && signUpForm.controls.password.touched" class="error-message">{{getSignUpFormError('password')}}</span>
-			<button (click)="signUp()">Sign Up</button>
+			<button  type="submit" (submit)="signUp()">Sign Up</button>
 			<a style="cursor: pointer;" (click)="toggleForm()" id="signIn2">Sign In</a>
 		</form>
 </div>

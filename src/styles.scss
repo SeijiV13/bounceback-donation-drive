@@ -25,6 +25,14 @@ input.ng-touched.ng-invalid {
     width:100%;
 }
 
+.alert-success {
+    background: rgb(11, 148, 18);
+    color: white;
+    padding: 15px;
+    width:100%;
+}
+
+
 .error-message {
     color:red;
 }

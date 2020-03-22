@@ -12,7 +12,7 @@
        <span>
            {{product?.name}}
        </span>
-       <button style="float:right" nbButton status="danger">Delete</button> 
+       <button style="float:right" nbButton status="danger" (click)="deleteProduct(product.id)">Delete</button> 
         <hr>
      </ng-template>
      <ng-template #frontTemplate>  

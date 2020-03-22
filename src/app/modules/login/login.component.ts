@@ -1,3 +1,4 @@
+import { AuthService } from './../../core/services/authentication.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,8 +13,13 @@ export class LoginComponent implements OnInit {
   formStatus = true;
   signUpForm: FormGroup;
   signInForm: FormGroup;
-  httpErrorMessage: string = '';
-  constructor(private router: Router, private fb: FormBuilder) { }
+  httpErrorSignInMessage = '';
+  httpErrorSignUpMessage = '';
+  successRegisterMessage = '';
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.listentActivePanel();
@@ -28,7 +34,8 @@ export class LoginComponent implements OnInit {
     this.signUpForm = this.fb.group({
       name: ['', [Validators.required]],
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      role: ['USER']
     });
   }
 
@@ -49,10 +56,29 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-     this.router.navigate(['/dashboard']);
+    const user = this.signInForm.getRawValue();
+    this.authService.signIn(user).subscribe((data) => {
+         localStorage.setItem('token', data.jwt);
+         this.router.navigate(['/dashboard']);
+      }, error => {
+        if (error) {
+          this.httpErrorSignInMessage = error.error.message;
+        }
+    });
   }
 
   signUp() {
+    const user = this.signUpForm.getRawValue();
+    this.authService.signUp(user).subscribe((data) => {
+       const container = document.getElementById('container');
+       container.classList.remove('right-panel-active');
+       this.successRegisterMessage = 'You have successfully created your new account, you can now login here.';
+       this.formStatus = true;
+    }, error => {
+      if (error) {
+        this.httpErrorSignUpMessage = error.error.message;
+      }
+    });
 
   }
 

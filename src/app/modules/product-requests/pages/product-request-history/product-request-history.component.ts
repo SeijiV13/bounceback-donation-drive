@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RequestorTicket } from 'src/app/shared/models/RequestorTicket';
+import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
 
 @Component({
   selector: 'app-product-request-history',
@@ -7,26 +8,17 @@ import { RequestorTicket } from 'src/app/shared/models/RequestorTicket';
   styleUrls: ['./product-request-history.component.scss']
 })
 export class ProductRequestHistoryComponent implements OnInit {
-  @Input() requestorTickets: RequestorTicket[] = [
-    {
-      id: '1',
-      name: 'Seiji Villafranca',
-      address: 'Pasig City',
-      contactPerson: 'Seiji VIllafranca',
-      contactNumber: '09127123123',
-      products: [{
-        name: 'Alcohol',
-        quantity: 4
-      },
-      {
-        name: 'Tissue',
-        quantity: 4
-      }]
-    }
-  ];
-  constructor() { }
+  @Input() requestorTickets: RequestorTicket[] = [];
+  constructor(private requestorService: RequestorTicketService) { }
 
   ngOnInit(): void {
+    this.getTickets();
+  }
+
+  getTickets() {
+    this.requestorService.getAllRequestorTicket().subscribe((data) => {
+      this.requestorTickets = data;
+   }); 
   }
 
 }

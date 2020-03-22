@@ -4,5 +4,6 @@ export interface DonorTicket {
   name: string;
   contactPerson: string;
   contactNumber: string;
-  products: Product[];
+  products: {id: string, quantity: number}[];
+  status: string;
 }

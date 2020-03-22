@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { User } from './../../shared/models/User';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 
 export class AuthService {
-  endpoint = 'http://10.63.0.108:3000/auth';
+  endpoint = environment.url;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -22,24 +23,23 @@ export class AuthService {
 
   // Sign-up
   signUp(user: User): Observable<any> {
-    const api = '${this.endpoint}/user';
-    return this.http.post(api, user)
-      .pipe(
+    const api = `${this.endpoint}/user`;
+    return this.http.post(api, user).pipe(
         tap(data => data),
         catchError(error => {
-          return throwError(`${error}`);
+          return throwError(error);
         })
       );
   }
 
   // Sign-in
   signIn(user: User) {
-    return this.http.post<any>(`${this.endpoint}/login`, user).pipe(
+    return this.http.post<any>(`${this.endpoint}/auth/login`, user).pipe(
       tap((data) => data),
       catchError(error => {
-        return throwError(`${error}`)
+        return throwError(error);
       })
-    )
+    );
   }
 
   getToken() {

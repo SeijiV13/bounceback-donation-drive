@@ -1,4 +1,5 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { ProductService } from './../../../../core/services/product.service';
+import { Component, OnInit, HostBinding, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NbToastrService } from '@nebular/theme';
 
@@ -10,9 +11,11 @@ import { NbToastrService } from '@nebular/theme';
 export class AddProductComponent implements OnInit {
   @HostBinding('class')
   classes = 'card-container';
+  @Output() createProductEmitter = new EventEmitter();
   form: FormGroup;
   constructor(private fb: FormBuilder,
               private toastrService: NbToastrService,
+              private productService: ProductService
     ) { }
 
   ngOnInit(): void {
@@ -30,8 +33,12 @@ export class AddProductComponent implements OnInit {
   }
 
   createProduct() {
-    console.log(this.form.getRawValue());
-    this.toastrService.show('success', `Added the ${name} product successsfully`, { status: 'success' });
+    const product = this.form.getRawValue();
+    this.productService.createProduct(product).subscribe((data) => {
+      this.createProductEmitter.emit();
+    }, error => {
+
+    });
   }
 
   clear() {

@@ -8,3 +8,23 @@ nav {
     display: flex !important;
     justify-content: space-between !important;
 }
+
+
+input.ng-touched.ng-invalid {
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: red !important;
+
+}
+
+
+.alert-danger {
+    background: rgb(241, 90, 90);
+    color: white;
+    padding: 15px;
+    width:100%;
+}
+
+.error-message {
+    color:red;
+}

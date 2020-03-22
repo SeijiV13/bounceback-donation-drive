@@ -1,3 +1,4 @@
+import { NebularModule } from './../../shared/modules/nebular/nebular.module';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { NgModule } from '@angular/core';
@@ -27,7 +28,8 @@ export class LoginRoutingModule { }
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NebularModule,
   ]
 })
 export class LoginModule { }

@@ -1,6 +1,7 @@
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import messages from 'src/app/core/messages/error-messages';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
   formStatus = true;
   signUpForm: FormGroup;
   signInForm: FormGroup;
+  httpErrorMessage: string = '';
   constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -20,13 +22,13 @@ export class LoginComponent implements OnInit {
 
   initializeForm() {
     this.signInForm = this.fb.group({
-      username: [''],
-      password: ['']
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
     this.signUpForm = this.fb.group({
-      name: [''],
-      username: [''],
-      password: ['']
+      name: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
@@ -56,6 +58,20 @@ export class LoginComponent implements OnInit {
 
   toggleForm() {
     this.formStatus = !this.formStatus;
+  }
+
+  getSigninFormError(controlName) {
+    if (this.signInForm.controls[controlName].errors) {
+        const keys = Object.keys(this.signInForm.controls[controlName].errors);
+        return messages[keys[0]];
+      }
+  }
+
+  getSignUpFormError(controlName) {
+    if (this.signUpForm.controls[controlName].errors) {
+        const keys = Object.keys(this.signUpForm.controls[controlName].errors);
+        return messages[keys[0]];
+      }
   }
 
 }

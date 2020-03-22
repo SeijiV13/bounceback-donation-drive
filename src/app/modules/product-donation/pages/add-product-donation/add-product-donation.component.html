@@ -9,6 +9,9 @@
 <form (ngSubmit)="createTicket()" [formGroup]="form">
     <ng-template #bodyTemplate>
             <div>
+              <div *ngIf="formHasError" class="alert-danger">
+                Form has errors
+              </div>
               <label for="name">Donor</label>
               <input formControlName="name" type="text" fullWidth nbInput status="primary" placeholder="Company A..."/>
             </div>

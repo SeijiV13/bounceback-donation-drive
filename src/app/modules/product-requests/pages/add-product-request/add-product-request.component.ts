@@ -1,6 +1,6 @@
 import { ProductService } from './../../../../core/services/product.service';
 import { Product } from './../../../../shared/models/Product';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AddProductRequestComponent implements OnInit {
   @Input() products: Product[] = [];
+  formHasError = false;
   form: FormGroup;
   constructor(private fb: FormBuilder,
               private productService: ProductService,
@@ -34,10 +35,10 @@ export class AddProductRequestComponent implements OnInit {
 
   initializeForm() {
     this.form = this.fb.group({
-      name: [''],
-      address: [''],
-      contactPerson: [''],
-      contactNumber: [''],
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      contactPerson: ['', [Validators.required]],
+      contactNumber: ['', [Validators.required]],
       products: this.fb.array([this.createProduct()])
   });
 }
@@ -47,6 +48,10 @@ getProducts() {
 }
 
   createTicket() {
+    if (this.form.hasError) {
+      this.formHasError = true;
+      return;
+    }
     const ticket = this.form.getRawValue();
     this.requestorService.createRequestorTicket(ticket).subscribe((data) => {
       this.toastr.success(data.message, 'Success!');
@@ -73,7 +78,7 @@ getProducts() {
 
   createProduct() {
     return this.fb.group({
-      id: [''],
+      id: ['', [Validators.required]],
       quantity: [1],
     });
   }

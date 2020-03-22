@@ -1,7 +1,7 @@
 import { ProductService } from './../../../../core/services/product.service';
 import { DonorTicketService } from './../../../../core/services/donor-ticket.service';
 import { Product } from './../../../../shared/models/Product';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddProductDonationComponent implements OnInit {
   @Input() products: Product[] = [];
+  formHasError = false;
   form: FormGroup;
   constructor(private fb: FormBuilder, private donorService: DonorTicketService,
               private router: Router,
@@ -24,19 +25,19 @@ export class AddProductDonationComponent implements OnInit {
    ngOnInit(): void {
     this.getAllProducts();
    }
- 
+
    getAllProducts() {
      this.productService.getProducts().subscribe((data) => {
        this.products = data;
      });
    }
- 
+
 
   initializeForm() {
     this.form = this.fb.group({
-      name: [''],
-      contactPerson: [''],
-      contactNumber: [''],
+      name: ['', [Validators.required]],
+      contactPerson: ['', [Validators.required]],
+      contactNumber: ['', [Validators.required]],
       products: this.fb.array([this.createProduct()])
   });
 }
@@ -44,6 +45,10 @@ export class AddProductDonationComponent implements OnInit {
 
 
 createTicket() {
+  if (this.form.hasError) {
+    this.formHasError = true;
+    return;
+  }
   const ticket = this.form.getRawValue();
   this.donorService.createDonorTicket(ticket).subscribe((data) => {
     this.toastr.success(data.message, 'Success!');
@@ -74,7 +79,7 @@ getProducts() {
 
   createProduct() {
     return this.fb.group({
-      id: [''],
+      id: ['', [Validators.required]],
       quantity: [1],
     });
   }

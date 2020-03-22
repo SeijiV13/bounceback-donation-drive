@@ -26,6 +26,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getUser() {
+    return localStorage.getItem('user');
+  }
+
   ngAfterViewInit() {
     const title =   this.pageTitle.titleMaps.find((data) => data.link === this.router.url);
     this.pageTitle.title = title.title;

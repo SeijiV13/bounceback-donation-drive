@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
     const user = this.signInForm.getRawValue();
     this.authService.signIn(user).subscribe((data) => {
          localStorage.setItem('token', data.jwt);
+         localStorage.setItem('user', data.name);
          this.router.navigate(['/dashboard']);
       }, error => {
         if (error) {

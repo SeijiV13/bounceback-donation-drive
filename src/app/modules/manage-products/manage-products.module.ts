@@ -10,6 +10,7 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './pages/add-product/add-product.component';
 import { TabsetNavigationComponent } from './pages/tabset-navigation/tabset-navigation.component';
+import { NbDialogModule } from '@nebular/theme';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ export class ManageProductsRoutingModule { }
     FormsModule,
     ReactiveFormsModule,
     NebularModule,
+    NbDialogModule.forChild(),
     HttpClientModule,
     ManageProductsRoutingModule
   ], providers: [AuthService, ProductService,

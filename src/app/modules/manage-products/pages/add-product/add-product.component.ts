@@ -1,8 +1,7 @@
 import { ProductService } from './../../../../core/services/product.service';
-import { Component, OnInit, HostBinding, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostBinding, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { NbToastrService } from '@nebular/theme';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -12,10 +11,11 @@ export class AddProductComponent implements OnInit {
   @HostBinding('class')
   classes = 'card-container';
   @Output() createProductEmitter = new EventEmitter();
+  @ViewChild('dialog') dialog;
   form: FormGroup;
   constructor(private fb: FormBuilder,
-              private toastrService: NbToastrService,
-              private productService: ProductService
+              private productService: ProductService,
+              private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -35,11 +35,16 @@ export class AddProductComponent implements OnInit {
   createProduct() {
     const product = this.form.getRawValue();
     this.productService.createProduct(product).subscribe((data) => {
+      this.toastr.success(data.message, 'Success!');
+      this.form.reset();
       this.createProductEmitter.emit();
     }, error => {
-
+      if (error) {
+        this.toastr.success(error.error.message, 'Error!');
+      }
     });
   }
+
 
   clear() {
     this.form.reset();

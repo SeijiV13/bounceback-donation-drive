@@ -26,7 +26,7 @@ export class DonorTicketService {
     );
   }
 
-  approveDonorTicker(id): Observable<{message: string}> {
+  approveDonorTicket(id): Observable<{message: string}> {
     return this.http.put(`${this.url}/donation/${id}`, {}).pipe(
       tap((data: {message: string}) => data),
       catchError(error => throwError(error))

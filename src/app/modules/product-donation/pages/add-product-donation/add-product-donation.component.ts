@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@ang
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import messages from 'src/app/core/messages/error-messages';
 
 @Component({
   selector: 'app-add-product-donation',
@@ -42,11 +43,25 @@ export class AddProductDonationComponent implements OnInit {
   });
 }
 
+getFormError(controlName) {
+  if (this.form.controls[controlName].errors) {
+      const keys = Object.keys(this.form.controls[controlName].errors);
+      return messages[keys[0]];
+    }
+}
+
 
 
 createTicket() {
-  if (this.form.hasError) {
-    this.formHasError = true;
+  this.formHasError = false;
+  Object.keys(this.form.controls).forEach((key) => {
+    if (this.form.controls[key].errors) {
+      this.formHasError = true;
+      return;
+    }
+  });
+  if (this.formHasError) {
+    this.form.markAllAsTouched();
     return;
   }
   const ticket = this.form.getRawValue();

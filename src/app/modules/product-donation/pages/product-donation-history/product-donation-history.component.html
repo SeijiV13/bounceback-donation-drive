@@ -9,11 +9,15 @@
         > 
        </app-flip-card>
         <ng-template #frontHeaderTemplate>
-            Ticket Number#: {{ticket.id}}  
+            Ticket Number#: {{ticket.id}}
+            <div><b>Status:</b> <span [ngClass]="ticket.status === 'Pending' ? 'pending': 'approved'"> {{ticket?.status}}</span></div>  
             <hr>
          </ng-template>
          <ng-template #frontTemplate>  
            <div>
+              <div class="status-box">
+                <button *ngIf="ticket.status === 'Pending'" nbButton outline status="success" (click)="ngxSmartModalService.getModal('approveModal').open(); selectId(ticket?.id)" >Approve</button>
+              </div>
               <h4>Donor Details</h4>
               <b>Name:</b>  {{ticket?.name}}
               <br>
@@ -42,3 +46,13 @@
         </ng-template>
     </div>
     
+    
+<ngx-smart-modal #approveModal identifier="approveModal">
+        <h5>Approving Donation</h5>
+        <p>You are about to approve this donation, Continue?</p>
+        <div style="float:right;">
+                <button nbButton outline status="success" (click)="approveTicket(ticketId)" >Approve</button> 
+                &nbsp;
+                <button nbButton outline status="info" (click)="approveModal.close()">Close</button>
+        </div>
+</ngx-smart-modal>

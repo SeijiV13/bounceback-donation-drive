@@ -10,6 +10,7 @@ import { ProductRequestHistoryComponent } from './pages/product-request-history/
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ export class ProductRequestsRoutingModule { }
     FormsModule,
     ReactiveFormsModule,
     NebularModule,
-    ProductRequestsRoutingModule
+    ProductRequestsRoutingModule,
+    NgxSmartModalModule.forChild()
 
   ],
   exports: [ProductRequestHistoryComponent],

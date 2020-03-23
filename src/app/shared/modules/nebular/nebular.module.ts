@@ -47,6 +47,7 @@ import { CardComponent } from './card/card.component';
     NbSelectModule,
     NbPopoverModule,
     NbAlertModule,
+
   ]
 })
 export class NebularModule { }

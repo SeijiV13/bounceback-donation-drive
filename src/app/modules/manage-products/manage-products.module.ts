@@ -10,7 +10,7 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './pages/add-product/add-product.component';
 import { TabsetNavigationComponent } from './pages/tabset-navigation/tabset-navigation.component';
-import { NbDialogModule } from '@nebular/theme';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 
 const routes: Routes = [
@@ -36,7 +36,8 @@ export class ManageProductsRoutingModule { }
     ReactiveFormsModule,
     NebularModule,
     HttpClientModule,
-    ManageProductsRoutingModule
+    ManageProductsRoutingModule,
+    NgxSmartModalModule.forChild(),
   ], providers: [AuthService, ProductService,
     {
       provide: HTTP_INTERCEPTORS,

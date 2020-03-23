@@ -12,7 +12,7 @@
        <span>
            {{product?.name}}
        </span>
-       <button style="float:right" nbButton status="danger" (click)="deleteProduct(product.id)">Delete</button> 
+       <button style="float:right" nbButton status="danger" (click)="ngxSmartModalService.getModal('deleteModal').open(); selectId(product?.id)" >Delete</button> 
         <hr>
      </ng-template>
      <ng-template #frontTemplate>  
@@ -34,4 +34,15 @@
     <ng-template #backTemplate>  
             {{product?.comments}}
     </ng-template>
+
 </div>
+
+<ngx-smart-modal #deleteModal identifier="deleteModal">
+        <h5>Product Deletion</h5>
+        <p>Are your sure you want to delete this product?</p>
+        <div style="float:right;">
+                <button nbButton outline status="danger" (click)="deleteProduct(selectedId)" >Delete</button> 
+                &nbsp;
+                <button nbButton outline status="info" (click)="deleteModal.close()">Close</button>
+        </div>
+</ngx-smart-modal>

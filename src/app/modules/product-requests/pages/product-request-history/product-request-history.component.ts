@@ -1,6 +1,8 @@
+import { ToastrService } from 'ngx-toastr';
+import { NgxSmartModalComponent, NgxSmartModalService } from 'ngx-smart-modal';
 import { Product } from './../../../../shared/models/Product';
 import { ProductService } from './../../../../core/services/product.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RequestorTicket } from 'src/app/shared/models/RequestorTicket';
 import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
 
@@ -11,12 +13,21 @@ import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.s
 })
 export class ProductRequestHistoryComponent implements OnInit {
   @Input() requestorTickets: RequestorTicket[] = [];
+  @ViewChild('approveModal') approveModal: NgxSmartModalComponent;
   products: Product[] = [];
-  constructor(private requestorService: RequestorTicketService, private productService: ProductService) { }
+  ticketId = '';
+  constructor(private requestorService: RequestorTicketService, 
+              private productService: ProductService, 
+              public ngxSmartModalService: NgxSmartModalService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getTickets();
     this.getProducts();
+  }
+
+  selectId(id) {
+    this.ticketId = id;
   }
 
   getTickets() {
@@ -35,6 +46,14 @@ export class ProductRequestHistoryComponent implements OnInit {
       return this.products.find((data) => data.id === id).name;
     }
     return '';
+  }
+
+  approveTicket(id) {
+    this.requestorService.approveDonorTicket(id).subscribe((data) => {
+      this.approveModal.close();
+      this.getTickets();
+      this.toastr.success(data.message, 'Success!');
+    });
   }
 
 }

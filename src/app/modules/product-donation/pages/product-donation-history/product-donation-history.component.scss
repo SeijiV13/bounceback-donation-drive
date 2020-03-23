@@ -1,7 +1,7 @@
 hr {
     border-color: rgb(231, 231, 231);
     border-width: 0.9px;
-    margin-bottom: -50px;
+    margin-bottom: -20px;
 }
 
 h4 {
@@ -10,4 +10,16 @@ h4 {
 
 .quantity {
     margin-left: 70px;
+}
+
+.status-box {
+    margin-bottom: -20px;
+}
+
+.pending {
+    color: red;
+}
+
+.approved {
+    color: green;
 }

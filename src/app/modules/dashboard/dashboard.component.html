@@ -2,13 +2,17 @@
     <nb-layout-header fixed>
   
         <span>
-            <fa-icon [icon]="faList" [size]="'1x'" (click)="toggle()"></fa-icon>
-            &nbsp;&nbsp;
-            <span>
+        <div class="row">
+            <div class="col menu-icon">
+                    <fa-icon [icon]="faList" [size]="'1x'" (click)="toggle()"></fa-icon>
+            </div>
+            <div class="col logo-container">
+                    <div class="logo"></div>
+            </div>
+            <div class="col title-container">
 
-                <fa-icon [icon]="faDonate" [size]="'2x'" (click)="toggle()"></fa-icon>
-                BounceBack Donation Drive 
-            </span>
+            </div>
+        </div>
         </span>   
         <nb-user style="cursor:pointer" [nbPopover]="templateRef" nbPopoverPlacement="bottom" size="medium" [name]="getUser()"  color="#cccccc"></nb-user>
    </nb-layout-header>

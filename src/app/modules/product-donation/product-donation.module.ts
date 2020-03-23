@@ -9,7 +9,7 @@ import { ProductDonationHistoryComponent } from './pages/product-donation-histor
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DonorTicketService } from 'src/app/core/services/donor-ticket.service';
-
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 const routes: Routes = [
   {
     path: 'add', component: AddProductDonationComponent,
@@ -36,7 +36,8 @@ export class ProductDonationRoutingModule { }
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ProductDonationRoutingModule
+    ProductDonationRoutingModule,
+    NgxSmartModalModule.forChild(),
   ], exports: [ProductDonationHistoryComponent],
   providers: [AuthService, DonorTicketService, {
     provide: HTTP_INTERCEPTORS,

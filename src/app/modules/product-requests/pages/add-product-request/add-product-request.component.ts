@@ -5,6 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import messages from 'src/app/core/messages/error-messages';
 
 @Component({
   selector: 'app-add-product-request',
@@ -48,10 +49,17 @@ getProducts() {
 }
 
   createTicket() {
-    if (this.form.hasError) {
+    this.formHasError = false;
+    Object.keys(this.form.controls).forEach((key) => {
+    if (this.form.controls[key].errors) {
       this.formHasError = true;
       return;
     }
+  });
+    if (this.formHasError) {
+    this.form.markAllAsTouched();
+    return;
+  }
     const ticket = this.form.getRawValue();
     this.requestorService.createRequestorTicket(ticket).subscribe((data) => {
       this.toastr.success(data.message, 'Success!');
@@ -63,6 +71,15 @@ getProducts() {
       }
     });
   }
+
+
+getFormError(controlName) {
+  if (this.form.controls[controlName].errors) {
+      const keys = Object.keys(this.form.controls[controlName].errors);
+      return messages[keys[0]];
+    }
+}
+
 
   clear() {
     this.form.reset();

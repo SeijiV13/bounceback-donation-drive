@@ -27,7 +27,7 @@ export class RequestorTicketService {
     );
   }
 
-  approveDonorTicker(id): Observable<{message: string}> {
+  approveDonorTicket(id): Observable<{message: string}> {
     return this.http.put(`${this.url}/requestor/${id}`, {}).pipe(
       tap((data: {message: string}) => data),
       catchError(error => throwError(error))

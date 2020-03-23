@@ -14,6 +14,7 @@
           </div>
           <label for="name">Requestor</label>
           <input formControlName="name" type="text" fullWidth nbInput status="primary" placeholder="Jane Doe"/>
+          <span *ngIf="form.controls.name.hasError && form.controls.name.touched" class="error-message">{{getFormError('name')}}</span>
         </div>
         <br/>
         <b>Address and Contact Information</b>
@@ -21,16 +22,19 @@
         <div>
             <label for="contactInformation">Address</label>
             <input formControlName="address" fullWidth nbInput status="primary" placeholder="Pasig City Etc...."/>
+            <span *ngIf="form.controls.address.hasError && form.controls.address.touched" class="error-message">{{getFormError('address')}}</span>
         </div>
         <br>
         <div>
           <label for="contactInformation">Contact Person</label>
           <input formControlName="contactPerson" fullWidth nbInput status="primary" placeholder="John Doe"/>
+          <span *ngIf="form.controls.contactPerson.hasError && form.controls.contactPerson.touched" class="error-message">{{getFormError('contactPerson')}}</span>
         </div>
         <br/>
         <div>
             <label for="quantity">Contact Number</label>
             <input formControlName="contactNumber" type="text" fullWidth nbInput status="primary" placeholder="+639171111111"/>
+            <span *ngIf="form.controls.contactNumber.hasError && form.controls.contactNumber.touched" class="error-message">{{getFormError('contactNumber')}}</span>
         </div>
 
 </ng-template>

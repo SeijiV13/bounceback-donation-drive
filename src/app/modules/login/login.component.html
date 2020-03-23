@@ -4,6 +4,9 @@
 			<div *ngIf="httpErrorSignUpMessage" class="alert-danger">
 				{{httpErrorSignUpMessage}}
 			</div>
+			<div *ngIf="signUpFormHasErrors" class="alert-danger">
+					Form has errors
+			</div>
 			<h1>Create new account</h1>
 
 			<input formControlName="name" type="text" placeholder="Name" />
@@ -24,6 +27,9 @@
 			</div>
 			<div *ngIf="successRegisterMessage" class="alert-success">
 				{{successRegisterMessage}}
+			</div>
+			<div *ngIf="signInFormHasErrors" class="alert-danger">
+					Form has errors
 			</div>
 			<h1>Sign in</h1>
 

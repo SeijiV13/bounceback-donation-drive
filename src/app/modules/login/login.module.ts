@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 const routes: Routes = [
   {
@@ -29,6 +29,7 @@ export class LoginRoutingModule { }
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
+    NgxUiLoaderModule,
     FormsModule,
     HttpClientModule,
   ], providers: [AuthService]

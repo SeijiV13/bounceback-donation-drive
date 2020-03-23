@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import messages from 'src/app/core/messages/error-messages';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,16 @@ export class LoginComponent implements OnInit {
   formStatus = true;
   signUpForm: FormGroup;
   signInForm: FormGroup;
+  signInFormHasErrors = false;
+  signUpFormHasErrors = false;
   httpErrorSignInMessage = '';
   httpErrorSignUpMessage = '';
   successRegisterMessage = '';
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private loaderService: NgxUiLoaderService) { }
 
   ngOnInit(): void {
     this.listentActivePanel();
@@ -56,19 +60,44 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
+    this.signInFormHasErrors = false;
+    Object.keys(this.signInForm.controls).forEach((key) => {
+    if (this.signInForm.controls[key].errors) {
+      this.signInFormHasErrors = true;
+      return;
+     }
+    });
+    if (this.signInFormHasErrors) {
+      this.signInForm.markAllAsTouched();
+      return;
+    }
     const user = this.signInForm.getRawValue();
+    this.loaderService.start();
     this.authService.signIn(user).subscribe((data) => {
+         this.loaderService.stop();
          localStorage.setItem('token', data.jwt);
          localStorage.setItem('user', data.name);
          this.router.navigate(['/dashboard']);
       }, error => {
         if (error) {
+          this.loaderService.stop();
           this.httpErrorSignInMessage = error.error.message;
         }
     });
   }
 
   signUp() {
+    this.signUpFormHasErrors = false;
+    Object.keys(this.signUpForm.controls).forEach((key) => {
+    if (this.signUpForm.controls[key].errors) {
+      this.signUpFormHasErrors = true;
+      return;
+     }
+    });
+    if (this.signUpFormHasErrors) {
+      this.signUpForm.markAllAsTouched();
+      return;
+    }
     const user = this.signUpForm.getRawValue();
     this.authService.signUp(user).subscribe((data) => {
        const container = document.getElementById('container');

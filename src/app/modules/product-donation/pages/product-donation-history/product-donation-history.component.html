@@ -44,7 +44,13 @@
                    <br>
             </ng-container>
         </ng-template>
-    </div>
+  </div>
+  <div *ngIf="donorTickets.length === 0" class="alert-info">
+     <div>  
+       No Product Donations
+     </div>
+     <button nbButton outline status="info" (click)="add()">  Add Donation</button>
+  </div>
     
     
 <ngx-smart-modal #approveModal identifier="approveModal">

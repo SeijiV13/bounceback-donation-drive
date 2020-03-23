@@ -5,6 +5,7 @@ import { ProductService } from './../../../../core/services/product.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RequestorTicket } from 'src/app/shared/models/RequestorTicket';
 import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-request-history',
@@ -19,7 +20,8 @@ export class ProductRequestHistoryComponent implements OnInit {
   constructor(private requestorService: RequestorTicketService, 
               private productService: ProductService, 
               public ngxSmartModalService: NgxSmartModalService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getTickets();
@@ -55,6 +57,10 @@ export class ProductRequestHistoryComponent implements OnInit {
       this.toastr.success(data.message, 'Success!');
     });
   }
+
+  add() {
+    this.router.navigate(['/dashboard/product-requests/add']);
+ }
 
 }
 

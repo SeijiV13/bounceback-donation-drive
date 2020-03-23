@@ -5,6 +5,7 @@ import { DonorTicket } from './../../../../shared/models/DonorTicket';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DonorTicketService } from 'src/app/core/services/donor-ticket.service';
 import { NgxSmartModalService, NgxSmartModalComponent } from 'ngx-smart-modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-donation-history',
@@ -19,7 +20,8 @@ export class ProductDonationHistoryComponent implements OnInit {
   constructor(private donorService: DonorTicketService,
               private productService: ProductService,
               public ngxSmartModalService: NgxSmartModalService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getTickets();
@@ -55,6 +57,9 @@ export class ProductDonationHistoryComponent implements OnInit {
       this.getTickets();
       this.toastr.success(data.message, 'Success!');
     });
+  }
+  add() {
+     this.router.navigate(['/dashboard/product-donation/add']);
   }
 
 }

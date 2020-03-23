@@ -104,6 +104,8 @@ export class LoginComponent implements OnInit {
        container.classList.remove('right-panel-active');
        this.successRegisterMessage = 'You have successfully created your new account, you can now login here.';
        this.formStatus = true;
+       this.signInForm.reset();
+       this.signInFormHasErrors = false;
     }, error => {
       if (error) {
         this.httpErrorSignUpMessage = error.error.message;

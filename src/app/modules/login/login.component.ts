@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../core/services/authentication.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
-    private loaderService: NgxUiLoaderService) { }
+    private loaderService: NgxUiLoaderService,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.listentActivePanel();
@@ -69,6 +71,7 @@ export class LoginComponent implements OnInit {
     });
     if (this.signInFormHasErrors) {
       this.signInForm.markAllAsTouched();
+      this.toastrService.error('Form has errors', 'Error!', {positionClass: 'toast-top-center', closeButton: true});
       return;
     }
     const user = this.signInForm.getRawValue();
@@ -82,6 +85,7 @@ export class LoginComponent implements OnInit {
         if (error) {
           this.loaderService.stop();
           this.httpErrorSignInMessage = error.error.message;
+          this.toastrService.error(this.httpErrorSignInMessage, 'Error!', {positionClass: 'toast-top-center', closeButton: true});
         }
     });
   }
@@ -95,6 +99,7 @@ export class LoginComponent implements OnInit {
      }
     });
     if (this.signUpFormHasErrors) {
+      this.toastrService.error('Form has errors', 'Error!', {positionClass: 'toast-top-center', closeButton: true});
       this.signUpForm.markAllAsTouched();
       return;
     }
@@ -103,12 +108,14 @@ export class LoginComponent implements OnInit {
        const container = document.getElementById('container');
        container.classList.remove('right-panel-active');
        this.successRegisterMessage = 'You have successfully created your new account, you can now login here.';
+       this.toastrService.success(this.successRegisterMessage, 'Success!', {positionClass: 'toast-top-center', closeButton: true});
        this.formStatus = true;
        this.signInForm.reset();
        this.signInFormHasErrors = false;
     }, error => {
       if (error) {
         this.httpErrorSignUpMessage = error.error.message;
+        this.toastrService.error(this.httpErrorSignUpMessage, 'Error!', {positionClass: 'toast-top-center', closeButton: true});
       }
     });
 

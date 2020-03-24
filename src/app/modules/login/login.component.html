@@ -1,14 +1,10 @@
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-			<div *ngIf="httpErrorSignUpMessage" class="alert-danger">
-				{{httpErrorSignUpMessage}}
-			</div>
-			<div *ngIf="signUpFormHasErrors" class="alert-danger">
-					Form has errors
-			</div>
-			<h1>Create new account</h1>
+		 <div class="logo">
 
+		</div>
+		<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+			<h1>Create new account</h1>
 			<input formControlName="name" type="text" placeholder="Name" />
 			<span *ngIf="signUpForm.controls.name.hasError && signUpForm.controls.name.touched" class="error-message">{{getSignUpFormError('name')}}</span>
 			<input formControlName="username" type="text" placeholder="Username" />
@@ -19,18 +15,10 @@
 		</form>
 	</div>
 	<div  class="form-container sign-in-container">
+        <div class="logo">
 
+		</div>
 		<form [formGroup]="signInForm" (ngSubmit)="signIn()">
-					
-			<div *ngIf="httpErrorSignInMessage" class="alert-danger">
-				{{httpErrorSignInMessage}}
-			</div>
-			<div *ngIf="successRegisterMessage" class="alert-success">
-				{{successRegisterMessage}}
-			</div>
-			<div *ngIf="signInFormHasErrors" class="alert-danger">
-					Form has errors
-			</div>
 			<h1>Sign in</h1>
 
 			<input formControlName="username" type="text" placeholder="Username" />
@@ -60,10 +48,10 @@
 
 
 <div *ngIf="formStatus" class="mobile-container mobile-sign-in-container">
+		<div class="logo">
+
+		</div>
 		<form [formGroup]="signInForm" (ngSubmit)="signIn()">
-			<div *ngIf="httpErrorSignInMessage" class="alert-danger">
-				{{httpErrorSignInMessage}}
-			</div>
 			<h1>Sign in</h1>
 	
 			<input formControlName="username" type="text" placeholder="Username" />
@@ -77,10 +65,10 @@
 </div>
 
 <div *ngIf="!formStatus" class="mobile-container mobile-sign-up-container">
+		<div class="logo">
+
+		</div>
 		<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-			<div *ngIf="httpErrorSignUpMessage" class="alert-danger">
-				{{httpErrorSignUpMessage}}
-			</div>
 			<h1>Create new account</h1>
 			<input formControlName="name" type="text" placeholder="Name" />
 			<span *ngIf="signUpForm.controls.name.hasError && signUpForm.controls.name.touched" class="error-message">{{getSignUpFormError('name')}}</span>

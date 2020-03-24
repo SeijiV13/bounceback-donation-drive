@@ -1,3 +1,4 @@
+import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './../../core/services/authentication.service';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login.component';
@@ -32,6 +33,7 @@ export class LoginRoutingModule { }
     NgxUiLoaderModule,
     FormsModule,
     HttpClientModule,
+    ToastrModule,
   ], providers: [AuthService]
 })
 export class LoginModule { }

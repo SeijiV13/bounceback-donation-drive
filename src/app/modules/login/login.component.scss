@@ -304,3 +304,13 @@ footer a {
 .alert-danger {
 	margin-top: -30px;
 }
+
+.logo {
+	height: 160px;
+    position: relative;
+    margin-bottom: -130px;
+	background: url('../../../assets//images/logo-tr.png');
+    background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}

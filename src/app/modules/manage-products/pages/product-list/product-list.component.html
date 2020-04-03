@@ -12,7 +12,7 @@
        <span>
            {{product?.name}}
        </span>
-       <button style="float:right" nbButton status="danger" (click)="ngxSmartModalService.getModal('deleteModal').open(); selectId(product?.id)" >Delete</button> 
+       <button *ngIf="activateDelete" style="float:right" nbButton status="danger" (click)="ngxSmartModalService.getModal('deleteModal').open(); selectId(product?.id)" >Delete</button> 
         <hr>
      </ng-template>
      <ng-template #frontTemplate>  

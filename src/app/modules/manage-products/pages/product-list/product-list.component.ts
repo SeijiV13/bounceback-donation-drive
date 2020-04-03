@@ -11,6 +11,7 @@ import { NgxSmartModalService, NgxSmartModalComponent } from 'ngx-smart-modal';
 })
 export class ProductListComponent implements OnInit {
   @Input() products: Product[] = [];
+  @Input() activateDelete = false;
   @ViewChild('deleteModal') deleteModal: NgxSmartModalComponent;
   selectedId = '';
   constructor(private productService: ProductService,

@@ -43,14 +43,6 @@ export class AddProductRequestComponent implements OnInit, AfterViewInit {
     this.autoComplete();
   }
 
-  mapProperties() {
-    const mapProperties = {
-      center: new google.maps.LatLng(this.latitude, this.longitude),
-      zoom: this.zoom,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-   };
-    this.map = new google.maps.Map(this.mapElement.nativeElement,  mapProperties);
-  }
 
    setCurrentLocation() {
     if ('geolocation' in navigator) {
@@ -58,7 +50,7 @@ export class AddProductRequestComponent implements OnInit, AfterViewInit {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 15;
-        // this.mapProperties();
+        this.getAddress(this.latitude, this.longitude);
       });
     }
   }
@@ -137,9 +129,9 @@ getFormError(controlName) {
 
   autoComplete() {
     this.mapsAPILoader.load().then(() => {
-      this.setCurrentLocation();
       // tslint:disable-next-line: new-parens
       this.geoCoder = new google.maps.Geocoder;
+      this.setCurrentLocation();
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ['address']
       });

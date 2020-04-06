@@ -17,8 +17,24 @@
               <span *ngIf="form.controls.name.hasError && form.controls.name.touched" class="error-message">{{getFormError('name')}}</span>
             </div>
             <br/>
-            <b>Contact Information</b>
+            <b>Address & Contact Information</b>
             <br><br>
+            <label for="contactInformation">Address</label>
+            <input formControlName="address" fullWidth nbInput status="primary" type="text" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+            <span *ngIf="form.controls.address.hasError && form.controls.address.touched" class="error-message">{{getFormError('address')}}</span>
+            <br>
+            <agm-map 
+              [latitude]="latitude" 
+               [longitude]="longitude" 
+              [zoom]="zoom" >
+            <agm-marker 
+               [latitude]="latitude" 
+               [longitude]="longitude"
+               [markerDraggable]="true"
+               (dragEnd)="markerDragEnd($event)"
+               >
+            </agm-marker>
+            </agm-map>
             <div>
               <label for="contactInformation">Contact Person</label>
               <input formControlName="contactPerson" fullWidth nbInput status="primary" placeholder="John Doe"/>

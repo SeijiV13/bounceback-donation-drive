@@ -15,11 +15,13 @@
          </ng-template>
          <ng-template #frontTemplate>  
            <div>
-              <div class="status-box">
+              <div *ngIf="admin" class="status-box">
                 <button *ngIf="ticket.status === 'Pending'" nbButton outline status="success" (click)="ngxSmartModalService.getModal('approveModal').open(); selectId(ticket?.id)" >Approve</button>
               </div>
               <h4>Donor Details</h4>
               <b>Name:</b>  {{ticket?.name}}
+              <br>
+              <b>Address:</b> {{ticket.address}}
               <br>
               <b>Contact Person:</b> {{ticket.contactPerson}}
               <br>

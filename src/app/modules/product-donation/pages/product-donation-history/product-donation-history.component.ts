@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../core/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from './../../../../shared/models/Product';
 import { ProductService } from './../../../../core/services/product.service';
@@ -17,15 +18,18 @@ export class ProductDonationHistoryComponent implements OnInit {
   @ViewChild('approveModal') approveModal: NgxSmartModalComponent;
   products: Product[] = [];
   ticketId = '';
+  admin = false;
   constructor(private donorService: DonorTicketService,
               private productService: ProductService,
               public ngxSmartModalService: NgxSmartModalService,
               private toastr: ToastrService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getTickets();
     this.getProducts();
+    this.testJwt();
   }
 
   selectId(id) {
@@ -61,5 +65,13 @@ export class ProductDonationHistoryComponent implements OnInit {
   add() {
      this.router.navigate(['/dashboard/product-donation/add']);
   }
+
+ testJwt() {
+  this.authService.testJwt().subscribe(() => {
+    this.admin = true;
+  }, () => {
+    this.admin = false;
+  })
+}
 
 }

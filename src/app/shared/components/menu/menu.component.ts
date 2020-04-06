@@ -1,3 +1,4 @@
+import { AuthService } from './../../../core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem, NbMenuService } from '@nebular/theme';
 import { Router, NavigationEnd } from '@angular/router';
@@ -32,10 +33,6 @@ export class MenuComponent implements OnInit {
                 {
                     title: 'Add Product Donation',
                     link: 'product-donation/add'
-                },
-                {
-                    title: 'Product Donation History',
-                    link: 'product-donation/history'
                 }
             ]
           },
@@ -47,17 +44,26 @@ export class MenuComponent implements OnInit {
                     title: 'Add Product Request',
                     link: 'product-requests/add'
                 },
-                {
-                    title: 'Product Request History',
-                    link: 'product-requests/history'
-                }
             ]
           },
     ];
 
-  constructor(private menuService: NbMenuService, private router: Router) {
+  constructor(private menuService: NbMenuService, private router: Router, private authService: AuthService) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+      this.authService.testJwt().subscribe(() => {
+         this.items[2].children.push(          {
+            title: 'Product Donation History',
+            link: 'product-donation/history'
+        });
+         this.items[3].children.push({
+            title: 'Product Request History',
+            link: 'product-requests/history'
+        });
+      }, error => {
+
+      });
+  }
 
 }

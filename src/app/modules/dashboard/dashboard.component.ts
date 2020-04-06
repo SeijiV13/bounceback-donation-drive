@@ -1,3 +1,4 @@
+import { AuthService } from './../../core/services/authentication.service';
 import { PageTitleComponent } from './../../shared/components/page-title/page-title.component';
 import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
@@ -11,13 +12,16 @@ import { faList, faDonate } from '@fortawesome/free-solid-svg-icons';
 export class DashboardComponent implements OnInit, AfterViewInit {
   faList = faList;
   faDonate = faDonate;
+  isLoggedIn = false;
   @ViewChild('pageTitle') pageTitle: PageTitleComponent;
   constructor(private sidebarService: NbSidebarService,
               private router: Router,
-              private cd: ChangeDetectorRef) {
+              private cd: ChangeDetectorRef, 
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.testJwt();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
        const titleObject =   this.pageTitle.titleMaps.find((data) => data.link === event.url); 
@@ -27,8 +31,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  testJwt() {
+    this.authService.testJwt().subscribe(() => {
+      this.isLoggedIn = true;
+    }, error => {
+      this.isLoggedIn = false;
+    });
+  }
+
   getUser() {
-    return localStorage.getItem('user');
+    return localStorage.getItem('user') ? localStorage.getItem('user') : 'Guest User';
   }
 
   ngAfterViewInit() {
@@ -42,8 +54,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   logout() {
     localStorage.clear();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
 
+  }
+
+  login() {
+    this.router.navigate(['login']);
   }
 
 }

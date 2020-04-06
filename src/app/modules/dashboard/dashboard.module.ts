@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductDonationModule } from '../product-donation/product-donation.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 const routes: Routes = [
   {
     path: '', component: DashboardComponent, children: [
@@ -42,6 +43,7 @@ export class DashboardRoutingModule { }
 @NgModule({
   declarations: [ DashboardComponent, MenuComponent, WidgetsComponent, PageTitleComponent],
   imports: [
+    NgxChartsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

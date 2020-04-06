@@ -1,31 +1,66 @@
 import { ProductService } from './../../../../core/services/product.service';
 import { Product } from './../../../../shared/models/Product';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, NgZone, ElementRef } from '@angular/core';
 import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import messages from 'src/app/core/messages/error-messages';
-
+import {} from 'googlemaps';
+import { MapsAPILoader } from '@agm/core';
 @Component({
   selector: 'app-add-product-request',
   templateUrl: './add-product-request.component.html',
   styleUrls: ['./add-product-request.component.scss']
 })
-export class AddProductRequestComponent implements OnInit {
+export class AddProductRequestComponent implements OnInit, AfterViewInit {
   @Input() products: Product[] = [];
+  @ViewChild('map', {static: false}) mapElement: any;
+  map: google.maps.Map;
+  latitude: any;
+  longitude: any;
+  zoom: any;
   formHasError = false;
   form: FormGroup;
+  geoCoder: any;
+  address: string;
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
   constructor(private fb: FormBuilder,
               private productService: ProductService,
               private toastr: ToastrService,
               private requestorService: RequestorTicketService,
-              private router: Router) {
+              private router: Router,
+              private mapsAPILoader: MapsAPILoader,
+              private ngZone: NgZone) {
     this.initializeForm();
    }
 
   ngOnInit(): void {
-   this.getAllProducts();
+    this.getAllProducts();
+  }
+  ngAfterViewInit() {
+    this.autoComplete();
+  }
+
+  mapProperties() {
+    const mapProperties = {
+      center: new google.maps.LatLng(this.latitude, this.longitude),
+      zoom: this.zoom,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+   };
+    this.map = new google.maps.Map(this.mapElement.nativeElement,  mapProperties);
+  }
+
+   setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 15;
+        // this.mapProperties();
+      });
+    }
   }
 
   getAllProducts() {
@@ -97,6 +132,59 @@ getFormError(controlName) {
     return this.fb.group({
       id: ['', [Validators.required]],
       quantity: [1],
+    });
+  }
+
+  autoComplete() {
+    this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
+      // tslint:disable-next-line: new-parens
+      this.geoCoder = new google.maps.Geocoder;
+      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ['address']
+      });
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          // get the place result
+          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          // verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          // set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+  }
+
+  markerDragEnd($event) {
+    console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+    this.getAddress(this.latitude, this.longitude);
+  }
+
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          this.address = results[0].formatted_address;
+          this.form.controls.address.patchValue(this.address);
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+
     });
   }
 }

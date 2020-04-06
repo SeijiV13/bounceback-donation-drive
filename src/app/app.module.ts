@@ -14,6 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxUiLoaderModule, NgxUiLoaderConfig, POSITION } from 'ngx-ui-loader';
+import { AgmCoreModule } from '@agm/core';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: '#ffffff',
   bgsOpacity: 1,
@@ -49,6 +50,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AppComponent,
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAMYg-49MAohiGq7rq0peQI0U07_aY1F8Q',
+      libraries: ['places', 'geometry']
+    }),
     CommonModule,
     BrowserModule,
     AppRoutingModule,

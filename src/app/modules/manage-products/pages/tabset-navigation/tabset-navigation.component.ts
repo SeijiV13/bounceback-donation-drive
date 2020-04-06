@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../core/services/authentication.service';
 import { ProductListComponent } from './../product-list/product-list.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -8,14 +9,24 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class TabsetNavigationComponent implements OnInit {
   @ViewChild('productList') productList: ProductListComponent;
-  constructor() { }
+  admin = false;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.testJwt();
   }
 
   getProducts() {
-    console.log("test");
     this.productList.getProducts();
   }
+
+  testJwt() {
+    this.authService.testJwt().subscribe((data) => {
+      this.admin = true;
+    }, (error) => {
+      this.admin = false;
+   })
+}
+
 
 }

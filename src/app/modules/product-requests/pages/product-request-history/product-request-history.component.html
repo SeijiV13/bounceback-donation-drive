@@ -16,7 +16,7 @@
          </ng-template>
          <ng-template #frontTemplate>  
            <div>
-              <div class="status-box">
+              <div *ngIf="admin" class="status-box">
                         <button *ngIf="ticket.status === 'Pending'" nbButton outline status="success" (click)="ngxSmartModalService.getModal('approveModal').open(); selectId(ticket?.id)" >Approve</button>
               </div>
               <h4>Requestor Details</h4>

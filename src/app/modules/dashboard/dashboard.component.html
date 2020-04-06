@@ -26,8 +26,11 @@
         <router-outlet></router-outlet>
         <ng-template #templateRef>
             <div style="padding:5px">
+                <button class="popup-button"  nbButton outline status="primary" (click)="login()">Admin Login</button>
+            </div>
+            <div style="padding:5px">
       
-                <button  nbButton outline status="info" (click)="logout()">Logout</button>
+                <button *ngIf="isLoggedIn" class="popup-button"  nbButton outline status="info" (click)="logout()">Logout</button>
             </div>
          </ng-template>
     </nb-layout-column>

@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
          this.loaderService.stop();
          localStorage.setItem('token', data.jwt);
          localStorage.setItem('user', data.name);
-         this.router.navigate(['/dashboard']);
+         this.router.navigate(['/']);
       }, error => {
         if (error) {
           this.loaderService.stop();
@@ -137,6 +137,10 @@ export class LoginComponent implements OnInit {
         const keys = Object.keys(this.signUpForm.controls[controlName].errors);
         return messages[keys[0]];
       }
+  }
+
+  continueGuest() {
+    this.router.navigate(['/']);
   }
 
 }

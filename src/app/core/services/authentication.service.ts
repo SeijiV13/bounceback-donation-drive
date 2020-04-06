@@ -42,6 +42,15 @@ export class AuthService {
     );
   }
 
+  testJwt() {
+    return this.http.post<any>(`${this.endpoint}/auth/testjwt`, {}).pipe(
+      tap((data) => data),
+      catchError(error => {
+        return throwError(error);
+      })
+    );
+  }
+
   getToken() {
     return localStorage.getItem('token');
   }

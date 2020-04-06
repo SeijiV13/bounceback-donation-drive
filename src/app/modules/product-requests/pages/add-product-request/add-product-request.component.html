@@ -21,8 +21,22 @@
         <br><br>
         <div>
             <label for="contactInformation">Address</label>
-            <input formControlName="address" fullWidth nbInput status="primary" placeholder="Pasig City Etc...."/>
+            <input formControlName="address" fullWidth nbInput status="primary" type="text" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
             <span *ngIf="form.controls.address.hasError && form.controls.address.touched" class="error-message">{{getFormError('address')}}</span>
+            <br>
+            <agm-map 
+              [latitude]="latitude" 
+               [longitude]="longitude" 
+              [zoom]="zoom" >
+            <agm-marker 
+               [latitude]="latitude" 
+               [longitude]="longitude"
+               [markerDraggable]="true"
+               (dragEnd)="markerDragEnd($event)"
+               >
+            </agm-marker>
+            </agm-map>
+ 
         </div>
         <br>
         <div>

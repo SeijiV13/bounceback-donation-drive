@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
-
+import { AgmCoreModule } from '@agm/core';
 
 const routes: Routes = [
   {
@@ -33,6 +33,11 @@ export class ProductRequestsRoutingModule { }
 @NgModule({
   declarations: [AddProductRequestComponent, ProductRequestHistoryComponent],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAMYg-49MAohiGq7rq0peQI0U07_aY1F8Q',
+      libraries: ['places'],
+      language: 'en'
+    }),
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

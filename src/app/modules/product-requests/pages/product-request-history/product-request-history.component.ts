@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../core/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSmartModalComponent, NgxSmartModalService } from 'ngx-smart-modal';
 import { Product } from './../../../../shared/models/Product';
@@ -6,6 +7,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RequestorTicket } from 'src/app/shared/models/RequestorTicket';
 import { RequestorTicketService } from 'src/app/core/services/requestor-ticket.service';
 import { Router } from '@angular/router';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-product-request-history',
@@ -17,15 +19,18 @@ export class ProductRequestHistoryComponent implements OnInit {
   @ViewChild('approveModal') approveModal: NgxSmartModalComponent;
   products: Product[] = [];
   ticketId = '';
+  admin = false;
   constructor(private requestorService: RequestorTicketService, 
               private productService: ProductService, 
               public ngxSmartModalService: NgxSmartModalService,
               private toastr: ToastrService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getTickets();
     this.getProducts();
+    this.testJwt();
   }
 
   selectId(id) {
@@ -60,6 +65,14 @@ export class ProductRequestHistoryComponent implements OnInit {
 
   add() {
     this.router.navigate(['/dashboard/product-requests/add']);
+ }
+
+ testJwt() {
+   this.authService.testJwt().subscribe(() => {
+     this.admin = true;
+   }, () => {
+     this.admin = false;
+   })
  }
 
 }

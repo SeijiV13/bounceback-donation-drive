@@ -6,10 +6,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', pathMatch: 'full', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
-  }, {
-    path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
-    canActivate: [AuthGuard]
+    path: '', redirectTo: 'dashboard', pathMatch: 'full',
+  },
+  {
+   path: 'login', pathMatch: 'full', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+
+  },
+  {
+   path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
   }
 ];
 

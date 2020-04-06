@@ -34,7 +34,7 @@ export class ProductRequestsRoutingModule { }
   declarations: [AddProductRequestComponent, ProductRequestHistoryComponent],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAMYg-49MAohiGq7rq0peQI0U07_aY1F8Q',
+      apiKey: 'AIzaSyBIWfPorufZXxYT3e9yMdZhLu0ieoJZW7s',
       libraries: ['places'],
       language: 'en'
     }),

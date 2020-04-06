@@ -51,7 +51,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   ],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAMYg-49MAohiGq7rq0peQI0U07_aY1F8Q',
+      apiKey: 'AIzaSyBIWfPorufZXxYT3e9yMdZhLu0ieoJZW7s',
       libraries: ['places', 'geometry']
     }),
     CommonModule,
